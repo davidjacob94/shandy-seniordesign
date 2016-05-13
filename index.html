@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<script src = "http://code.jquery.com/jquery-1.11.3.js"></script>
+		<script src = "https://cdn.socket.io/socket.io-1.2.0.js"></script>
+	</head>
+	<body>
+		<div style = "width:50%; margin: 0 auto">
+			<table>
+				<tr>
+					<td>
+						<h2 align = "center">Outlet 1</h2>
+					</td>
+					<td>
+						<h2 align = "center">Outlet 2</h2>
+					</td>
+					<td>
+						<h2 align = "center">Outlet 3</h2>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p id = "sckt_1" align = "center" style = "font-size:64px;padding:12px"></p>
+					</td>
+					<td>
+						<p id = "sckt_2" align = "center" style = "font-size:64px;padding:12px"></p>
+					</td>
+					<td>
+						<p id = "sckt_3" align = "center" style = "font-size:64px;padding:12px"></p>
+					</td>
+				</tr>
+				<tr>
+					<td align = "center">
+						<button id = "button1a" type="button" class="btn btn-primary active btn-lg">On</button>
+						<button id = "button1b" type="button" class="btn btn-primary disabled btn-lg">Off</button>
+					</td>
+					<td align = "center">
+						<button id = "button2a" type="button" class="btn btn-primary active btn-lg">On</button>
+						<button id = "button2b" type="button" class="btn btn-primary disabled btn-lg">Off</button>
+					</td>
+					<td align = "center">
+						<button id = "button3a" type="button" class="btn btn-primary active btn-lg">On</button>
+						<button id = "button3b" type="button" class="btn btn-primary disabled btn-lg">Off</button>
+					</td>
+				</tr>
+				<tr>
+					<td align = "center" style = "padding:8px">
+						<a href = "chart1.html" id = "graphs" type = "button" class="btn btn-primary">Display Graph</a>
+					</td>
+					<td align = "center" style = "padding:8px">
+						<a href = "chart2.html" id = "graphs" type = "button" class="btn btn-primary">Display Graph</a>
+					</td>
+					<td align = "center" style = "padding:8px">
+						<a href = "chart3.html" id = "graphs" type = "button" class="btn btn-primary">Display Graph</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<script>
+			var socket = io();
+			
+			// Receives live update
+			socket.on('sckt_1', function(msg){
+				$('#sckt_1').text(msg + ' W');
+			});
+			socket.on('sckt_2', function(msg){
+				$('#sckt_2').text(msg + ' W');
+			});
+			socket.on('sckt_3', function(msg){
+				$('#sckt_3').text(msg + ' W');
+			});
+			
+			
+			// Button clicks
+   				$("#button1a").unbind().click(function(){
+				console.log('1H');
+				//socket.emit('sckt_ctl', '1H');
+				socket.emit('sckt_ctl', '1');
+			});
+   				$("#button1b").unbind().click(function(){
+				console.log('1L');
+				//socket.emit('sckt_ctl', '1L');
+				socket.emit('sckt_ctl', '2');
+			});
+   				$("#button2a").unbind().click(function(){
+				console.log('2H');
+				//socket.emit('sckt_ctl', '2H');
+				socket.emit('sckt_ctl', '3');
+			});
+   				$("#button2b").unbind().click(function(){
+				console.log('2L');
+				//socket.emit('sckt_ctl', '2L');
+				socket.emit('sckt_ctl', '4');
+			});
+   				$("#button3a").unbind().click(function(){
+				console.log('3H');
+				//socket.emit('sckt_ctl', '3H');
+				socket.emit('sckt_ctl', '5');
+			});
+   				$("#button3b").unbind().click(function(){
+				console.log('3L');
+				//socket.emit('sckt_ctl', '3L');
+				socket.emit('sckt_ctl', '6');
+			});
+ 
+			
+
+		</script>
+		
+		
+		
+	</body>	
+</html>
